@@ -8,6 +8,11 @@ function notificationReducer(state, action) {
       return `voted on '${action.payload}'`;
     case "ADDED":
       return `added '${action.payload}'`;
+    case "ERROR": {
+      const errorResponse = action.payload.response;
+      if (errorResponse.status === 400)
+        return `anecdote is too short, must have length 5 or more`;
+    }
   }
 }
 

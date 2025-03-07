@@ -12,8 +12,6 @@
   height: 24px;
   animation: spin 1s linear infinite;
   position: absolute;
-  top: 50px;
-  left: 50px;
 }
 
 .spinner-text {

@@ -19,6 +19,13 @@ const AnecdoteForm = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["anecdotes"] });
     },
+    onError: (error) => {
+      console.log(error);
+      dispatchNotification({ type: "ERROR", payload: error });
+      setTimeout(() => {
+        dispatchNotification({ type: "CLEAR" });
+      }, 5000);
+    },
   });
 
   const onCreate = (event) => {
@@ -34,7 +41,7 @@ const AnecdoteForm = () => {
   return (
     <div>
       <h3>create new</h3>
-      {newAnecdoteMutation.isPending && <LoadingSpinner />}
+
       <form>
         <input
           onChange={(e) => {
@@ -45,6 +52,7 @@ const AnecdoteForm = () => {
         <button onClick={onCreate} type="submit">
           create
         </button>
+        {newAnecdoteMutation.isPending && <LoadingSpinner />}
       </form>
     </div>
   );
